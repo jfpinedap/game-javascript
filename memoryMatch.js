@@ -5,6 +5,7 @@ var started = false;
 var time = 0;
 var ready = true;
 var numCompleted = 0;
+var numGrids = 16;
 
 //execute functions here:
 setUp();
@@ -12,7 +13,7 @@ setUp();
 //function definitions go here:
 
 function randomAnswers() {
-  var answers = [1, 1, 2, 2, 3, 3, 4, 4, 5];
+  var answers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
   answers.sort(function(item) {
     return 0.5 - Math.random();
   });
@@ -68,12 +69,20 @@ function setUp() {
     cell.value = answers[i];
 
     cell.addEventListener("mouseenter", function() {
-      if (this.completed === false && this.clicked === false && numCompleted < 8)
+      if (
+        this.completed === false &&
+        this.clicked === false &&
+        numCompleted < numGrids
+      )
         this.style.background = "orange";
     });
 
     cell.addEventListener("mouseleave", function() {
-      if (this.completed === false && this.clicked === false && numCompleted < 8)
+      if (
+        this.completed === false &&
+        this.clicked === false &&
+        numCompleted < numGrids
+      )
         this.style.background = "blue";
     });
 
@@ -83,7 +92,7 @@ function setUp() {
       if (
         this.clicked === false &&
         this.completed === false &&
-        numCompleted < 8
+        numCompleted < numGrids
       ) {
         clickedArray.push(this);
         reveal(this);
@@ -96,7 +105,7 @@ function setUp() {
 
           clickedArray = [];
 
-          if (numCompleted == 8) {
+          if (numCompleted == numGrids) {
             alert("You won in " + time + " seconds!");
             clearInterval(interval);
           }
